@@ -1,7 +1,7 @@
 {
   "name": "react-webspeech",
-  "version": "1.0.1",
-  "description": "Official WebSpeech hooks for React.",
+  "version": "0.0.1",
+  "description": "Official WebSpeech for React.",
   "author": "Bunlong <bunlong.van@gmail.com>",
   "license": "MIT",
   "repository": {
