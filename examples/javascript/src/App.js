@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSpeechRecognition } from 'react-webspeech';
 
 function App() {
-  return 'App';
+  const { transcript } = useSpeechRecognition();
+
+  return transcript;
 };
 
 export default App;
