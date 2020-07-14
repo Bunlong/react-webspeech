@@ -9,7 +9,7 @@ import pkg from './package.json';
 // import builtins from 'builtin-modules'
 
 export default {
-  input: 'src/library-name.ts',
+  input: 'src/react-webspeech.ts',
   output: [
     {
       file: pkg.main,
