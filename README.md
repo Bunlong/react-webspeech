@@ -2,7 +2,9 @@
   ⭐️ If you like react-webspeech, give it a star! ⭐️
 </p>
 
-<img src="https://github.com/Bunlong/react-webspeech/blob/master/static/images/react-webspeech.png" width="70%" height="70%" align="center" />
+<p align="center">
+  <img src="https://github.com/Bunlong/react-webspeech/blob/master/static/images/react-webspeech.png" width="70%" height="70%" />
+</p>
 
 # react-webspeech
 
