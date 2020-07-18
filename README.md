@@ -5,12 +5,12 @@
 <br />
 
 <p align="center">
-  <img src="https://github.com/Bunlong/react-webspeech/blob/master/static/images/react-webspeech.png" width="80%" height="80%" />
+  <img src="https://github.com/Bunlong/react-webspeech/blob/master/static/images/react-webspeech.png" width="80%" height="80%" alt="react-webspeech" />
 </p>
 
 # react-webspeech
 
-react-webspeech – a lightweight cross-browser CSS animations library.
+react-webspeech – Official WebSpeech for React.
 
 [![NPM](https://img.shields.io/npm/v/react-webspeech.svg)](https://www.npmjs.com/package/react-webspeech) [![downloads](https://img.shields.io/npm/dm/react-webspeech.svg?style=flat-square)](https://www.npmjs.com/package/react-webspeech) ![npm bundle size](https://img.shields.io/bundlephobia/min/react-webspeech) [![Build Status](https://api.travis-ci.com/Bunlong/react-webspeech.svg?branch=master)](https://travis-ci.com/Bunlong/react-webspeech) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
