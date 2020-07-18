@@ -56,12 +56,33 @@ function App() {
 export default App;
 ```
 
-#### useSpeechSynthesis APIs
+#### Prop
 
 <table>
   <thead>
     <tr>
-      <th>APIs</th>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Require</th>
+      <th>Description</th>
+    </tr>
+  <thead>
+  <tbody>
+    <tr>
+      <td>onEnd</td>
+      <td>() => void</td>
+      <td>❌</td>
+      <td>Is called when the utterance has finished being spoken.</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Return
+
+<table>
+  <thead>
+    <tr>
+      <th>Return</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
