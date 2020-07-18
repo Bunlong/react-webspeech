@@ -56,7 +56,7 @@ function App() {
 export default App;
 ```
 
-### useSpeechSynthesis APIs
+#### useSpeechSynthesis APIs
 
 <table>
   <thead>
@@ -101,7 +101,7 @@ export default App;
   </tbody>
 </table>
 
-### SpeakParams
+#### SpeakParams
 
 <table>
   <thead>
