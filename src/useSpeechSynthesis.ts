@@ -84,6 +84,7 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
       setIsSupported(true);
       getVoices();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
