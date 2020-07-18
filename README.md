@@ -63,7 +63,6 @@ export default App;
     <tr>
       <th>APIs</th>
       <th>Type</th>
-      <th>Value</th>
       <th>Description</th>
     </tr>
   <thead>
@@ -71,31 +70,26 @@ export default App;
     <tr>
       <td>isSupported</td>
       <td>boolean</td>
-      <td><code>true/false</code></td>
-      <td><code>true</code> if the browsers supports SpeechSynthesis.</td>
+      <td><code>true</code> if the browsers supports SpeechSynthesis otherwise <code>false</code>.</td>
     </tr>
     <tr>
       <td>isSpeaking</td>
       <td>boolean</td>
-      <td><code>true/false</code></td>
-      <td><code>true</code> if SpeechSynthesis is speaking.</td>
+      <td><code>true</code> if SpeechSynthesis is speaking otherwise <code>false</code>.</td>
     </tr>
     <tr>
       <td>cancel</td>
       <td>() => void</td>
-      <td></td>
       <td>Is called to stop reading.</td>
     </tr>
     <tr>
       <td>voices</td>
-      <td><code>Array<<a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a>></code></td>
-      <td>[{ default: true, lang: "en-US", localService: false, name: "Google US English", voiceURI: "Google US Englis" }, ...]</td>
+      <td><code>[<a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a>]</code></td>
       <td>Is used to get an array of <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a> that is passed to the speak function.</td>
     </tr>
     <tr>
       <td>speak</td>
       <td>(SpeakParams) => void</td>
-      <td></td>
       <td>Is called to read some text.</td>
     </tr>
   </tbody>
