@@ -5,12 +5,7 @@ interface Transcript {
 }
 
 export function useSpeechRecognition(): Transcript {
-  useEffect(
-    function () {
-      
-    },
-    [],
-  );
+  useEffect(function () {}, []);
 
   return { transcript: 'string' };
 }
