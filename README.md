@@ -89,7 +89,7 @@ export default App;
     </tr>
     <tr>
       <td>speak</td>
-      <td>(SpeakParams) => void</td>
+      <td>([SpeakParams](#speakparams)) => void</td>
       <td>Is called to read some text.</td>
     </tr>
   </tbody>
