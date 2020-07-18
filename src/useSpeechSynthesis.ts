@@ -2,22 +2,30 @@ import { useState, useEffect } from 'react';
 
 interface SpeechSynthesis {
   isSupported: boolean;
-  onSpeak: (params: OnSpeakParams) => void;
-  onCancel: () => void;
+  speak: (params: SpeakParams) => void;
+  cancel: () => void;
   isSpeaking: boolean;
-  voices: any;
+  voices: Array<SpeechSynthesisVoice>;
 }
 
 interface Props {
   onEnd?: () => void;
 }
 
-interface OnSpeakParams {
-  voice?: null;
+interface SpeakParams {
   text?: '';
+  voice?: SpeechSynthesisVoice;
   rate?: 1;
   pitch?: 1;
   volume?: 1;
+}
+
+interface SpeechSynthesisVoice {
+  default: true;
+  lang: 'de-DE';
+  localService: false;
+  name: 'Google Deutsch';
+  voiceURI: 'Google Deutsch';
 }
 
 export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
@@ -26,20 +34,16 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isSupported, setIsSupported] = useState(false);
 
-  function processVoices(voiceOptions: any) {
-    setVoices(voiceOptions);
-  }
-
   function getVoices() {
     let voiceOptions = window.speechSynthesis.getVoices();
     if (voiceOptions.length > 0) {
-      processVoices(voiceOptions);
+      setVoices(voiceOptions as any);
       return;
     }
 
     window.speechSynthesis.onvoiceschanged = (event) => {
       voiceOptions = (event.target as any).getVoices();
-      processVoices(voiceOptions);
+      setVoices(voiceOptions as any);
     };
   }
 
@@ -50,7 +54,7 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
     }
   }
 
-  function onSpeak(params: OnSpeakParams) {
+  function speak(params: SpeakParams) {
     const { voice, text, rate, pitch, volume } = params;
 
     if (!isSupported) {
@@ -59,17 +63,17 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
 
     setIsSpeaking(true);
 
-    const utterance = new window.SpeechSynthesisUtterance();
-    utterance.text = text as string;
-    utterance.voice = voice as any;
-    utterance.rate = rate as number;
-    utterance.pitch = pitch as number;
-    utterance.volume = volume as number;
-    utterance.onend = handleOnEnd;
-    window.speechSynthesis.speak(utterance);
+    const utterThis = new window.SpeechSynthesisUtterance();
+    utterThis.text = text as string;
+    utterThis.voice = voice as any;
+    utterThis.rate = rate as number;
+    utterThis.pitch = pitch as number;
+    utterThis.volume = volume as number;
+    utterThis.onend = handleOnEnd;
+    window.speechSynthesis.speak(utterThis);
   }
 
-  function onCancel() {
+  function cancel() {
     if (!isSupported) {
       return;
     }
@@ -84,13 +88,12 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
       setIsSupported(true);
       getVoices();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
     isSupported,
-    onSpeak,
-    onCancel,
+    speak,
+    cancel,
     isSpeaking,
     voices,
   };
