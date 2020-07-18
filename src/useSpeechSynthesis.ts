@@ -69,7 +69,7 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
     window.speechSynthesis.speak(utterance);
   }
 
-  const onCancel = () => {
+  function onCancel() {
     if (!isSupported) {
       return;
     }
@@ -77,7 +77,7 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
     setIsSpeaking(false);
 
     window.speechSynthesis.cancel();
-  };
+  }
 
   useEffect(function () {
     if (typeof window !== 'undefined' && window.speechSynthesis) {
