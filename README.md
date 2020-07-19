@@ -100,17 +100,17 @@ export default App;
     </tr>
     <tr>
       <td>cancel</td>
-      <td>() => void</td>
+      <td>(): void</td>
       <td>Is called to stop reading.</td>
     </tr>
     <tr>
       <td>voices</td>
-      <td><code>[<a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a>]</code></td>
+      <td><code><a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a>[]</code></td>
       <td>Is used to get an array of <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a> that is passed to the speak function.</td>
     </tr>
     <tr>
       <td>speak</td>
-      <td>(<a href="#speakparams">SpeakParams</a>) => void</td>
+      <td>(<a href="#speakparams">SpeakParams</a>): void</td>
       <td>Is called to read some text.</td>
     </tr>
   </tbody>
@@ -139,7 +139,7 @@ export default App;
     <tr>
       <td>voice</td>
       <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a></td>
-      <td><code>{ default: true, lang: 'de-DE', localService: false, name: 'Google Deutsch', voiceURI: 'Google Deutsch' }</code></td>
+      <td><code>speechSynthesis.getVoices()[0]</code></td>
       <td>❌</td>
       <td>The voice that will be used to speak the utterance.</td>
     </tr>
@@ -170,6 +170,35 @@ export default App;
 ## useSpeechRecognition
 
 `useSpeechRecognition` is a speech-to-text react hook.
+
+```jsx
+import React, { useState } from 'react';
+import { useSpeechRecognition } from 'react-speech-kit';
+
+function App() {
+  const [value, setValue] = useState('');
+  const { start, isListening, stop } = useSpeechRecognition({
+    onResult: (result) => {
+      setValue(result);
+    },
+  });
+
+  return (
+    <>
+      <textarea
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      />
+      <button onMouseDown={start} onMouseUp={stop}>
+        🎤
+      </button>
+      {isListening && <div>Go ahead I'm listening</div>}
+    </>
+  );
+}
+
+export default App;
+```
 
 ## 💖 Wrap Up
 

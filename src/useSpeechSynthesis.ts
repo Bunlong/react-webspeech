@@ -13,19 +13,11 @@ interface Props {
 }
 
 interface SpeakParams {
-  text?: '';
+  text?: string;
   voice?: SpeechSynthesisVoice;
-  rate?: 1;
-  pitch?: 1;
-  volume?: 1;
-}
-
-interface SpeechSynthesisVoice {
-  default: true;
-  lang: 'de-DE';
-  localService: false;
-  name: 'Google Deutsch';
-  voiceURI: 'Google Deutsch';
+  rate?: number;
+  pitch?: number;
+  volume?: number;
 }
 
 export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
@@ -40,7 +32,6 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
       setVoices(voiceOptions as any);
       return;
     }
-
     window.speechSynthesis.onvoiceschanged = (event) => {
       voiceOptions = (event.target as any).getVoices();
       setVoices(voiceOptions as any);
@@ -54,18 +45,27 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
     }
   }
 
-  function speak(params: SpeakParams) {
-    const { voice, text, rate, pitch, volume } = params;
+  function getDefaultVoice() {
+    if (typeof speechSynthesis === 'undefined') {
+      return undefined;
+    }
+    return speechSynthesis.getVoices()[0];
+  }
 
+  function speak({
+    voice = getDefaultVoice(),
+    text = '',
+    rate = 1,
+    pitch = 1,
+    volume = 1,
+  }: SpeakParams) {
     if (!isSupported) {
       return;
     }
-
     setIsSpeaking(true);
-
     const utterThis = new window.SpeechSynthesisUtterance();
     utterThis.text = text as string;
-    utterThis.voice = voice as any;
+    utterThis.voice = voice as SpeechSynthesisVoice;
     utterThis.rate = rate as number;
     utterThis.pitch = pitch as number;
     utterThis.volume = volume as number;
@@ -77,9 +77,7 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
     if (!isSupported) {
       return;
     }
-
     setIsSpeaking(false);
-
     window.speechSynthesis.cancel();
   }
 
