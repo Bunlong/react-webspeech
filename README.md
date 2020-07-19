@@ -72,7 +72,7 @@ export default App;
       <td>onEnd</td>
       <td>() => void</td>
       <td>❌</td>
-      <td>Is called when the utterance has finished being spoken.</td>
+      <td>Called when SpeechSynthesis has finished being spoken.</td>
     </tr>
   </tbody>
 </table>
@@ -99,24 +99,24 @@ export default App;
       <td><code>true</code> if SpeechSynthesis is speaking otherwise <code>false</code>.</td>
     </tr>
     <tr>
-      <td>cancel</td>
-      <td>(): void</td>
-      <td>Is called to stop reading.</td>
-    </tr>
-    <tr>
       <td>voices</td>
       <td><code><a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a>[]</code></td>
-      <td>Is used to get an array of <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a> that is passed to the speak function.</td>
+      <td>Use to get an array of <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a> that is passed to the speak function.</td>
+    </tr>
+    <tr>
+      <td>cancel</td>
+      <td>(): void</td>
+      <td>Called to stop reading.</td>
     </tr>
     <tr>
       <td>speak</td>
-      <td>(<a href="#speakparams">SpeakParams</a>): void</td>
-      <td>Is called to read some text.</td>
+      <td>(<a href="#speakparams">speak Params</a>): void</td>
+      <td>Called to make SpeechSynthesis read the text.</td>
     </tr>
   </tbody>
 </table>
 
-#### SpeakParams
+#### speak Params
 
 <table>
   <thead>
@@ -134,35 +134,35 @@ export default App;
       <td>string</td>
       <td><code>""</code></td>
       <td>❌</td>
-      <td>The text that will be synthesised when the utterance is spoken.</td>
+      <td>The text that will be read by SpeechSynthesis.</td>
     </tr>
     <tr>
       <td>voice</td>
       <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">SpeechSynthesisVoice</a></td>
       <td><code>speechSynthesis.getVoices()[0]</code></td>
       <td>❌</td>
-      <td>The voice that will be used to speak the utterance.</td>
+      <td>The voice that will be used to speak.</td>
     </tr>
     <tr>
       <td>rate</td>
       <td>number</td>
       <td><code>1</code></td>
       <td>❌</td>
-      <td>The speed at which the utterance will be spoken at.</td>
+      <td>The speed at which SpeechSynthesis will be spoken at.</td>
     </tr>
     <tr>
       <td>pitch</td>
       <td>number</td>
       <td><code>1</code></td>
       <td>❌</td>
-      <td>The pitch at which the utterance will be spoken at.</td>
+      <td>The pitch at which SpeechSynthesis will be spoken at.</td>
     </tr>
     <tr>
       <td>volume</td>
       <td>number</td>
       <td><code>1</code></td>
       <td>❌</td>
-      <td>The volume that the utterance will be spoken at.</td>
+      <td>The volume that SpeechSynthesis will be spoken at.</td>
     </tr>
   </tbody>
 </table>
@@ -171,34 +171,157 @@ export default App;
 
 `useSpeechRecognition` is a speech-to-text react hook.
 
+### Usage
+
 ```jsx
 import React, { useState } from 'react';
 import { useSpeechRecognition } from 'react-speech-kit';
 
 function App() {
-  const [value, setValue] = useState('');
-  const { start, isListening, stop } = useSpeechRecognition({
-    onResult: (result) => {
-      setValue(result);
+  const [text, setText] = useState('');
+  const { isListening, startListening, stopListening } = useSpeechRecognition({
+    onResult: (transcript) => {
+      setText(transcript);
     },
   });
 
   return (
     <>
       <textarea
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
+        value={text}
+        onChange={(event) => setText(event.target.value)}
       />
-      <button onMouseDown={start} onMouseUp={stop}>
-        🎤
+      {isListening && <p>I'm listening</p>}
+      <button
+        onMouseDown={startListening}
+        onMouseUp={stopListening}
+      >
+        Start Listening
       </button>
-      {isListening && <div>Go ahead I'm listening</div>}
     </>
   );
 }
 
 export default App;
 ```
+
+#### Prop
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Require</th>
+      <th>Description</th>
+    </tr>
+  <thead>
+  <tbody>
+    <tr>
+      <td>onResult</td>
+      <td>(transcript): string</td>
+      <td>❌</td>
+      <td>Called to get the transcript.</td>
+    </tr>
+    <tr>
+      <td>onEnd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>onError</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+#### Return
+
+<table>
+  <thead>
+    <tr>
+      <th>Return</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  <thead>
+  <tbody>
+    <tr>
+      <td>isSupported</td>
+      <td>boolean</td>
+      <td><code>true</code> if the browsers supports SpeechRecognition otherwise <code>false</code>.</td>
+    </tr>
+    <tr>
+      <td>isListening</td>
+      <td><code>true</code> if SpeechRecognition is listening otherwise <code>false</code>.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>stopListening</td>
+      <td></td>
+      <td>Called to make SpeechRecognition stop listening the input.</td>
+    </tr>
+    <tr>
+      <td>startListening</td>
+      <td></td>
+      <td>Called to make SpeechRecognition start listening the input.</td>
+    </tr>
+  </tbody>
+</table>
+
+#### startListening Params
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Require</th>
+      <th>Description</th>
+    </tr>
+  <thead>
+  <tbody>
+    <tr>
+      <td>lang</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>interimResults</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>continuous</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>maxAlternatives</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>grammars</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 
 ## 💖 Wrap Up
 

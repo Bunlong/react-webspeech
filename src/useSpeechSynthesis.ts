@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 
-interface SpeechSynthesis {
-  isSupported: boolean;
-  speak: (params: SpeakParams) => void;
-  cancel: () => void;
-  isSpeaking: boolean;
-  voices: Array<SpeechSynthesisVoice>;
-}
-
 interface Props {
   onEnd?: () => void;
+}
+
+interface SpeechSynthesis {
+  isSupported: boolean;
+  isSpeaking: boolean;
+  voices: Array<SpeechSynthesisVoice>;
+  cancel: () => void;
+  speak: (params: SpeakParams) => void;
 }
 
 interface SpeakParams {
@@ -21,7 +21,7 @@ interface SpeakParams {
 }
 
 export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
-  const { onEnd } = props;
+  const { onEnd = function () {} } = props;
   const [voices, setVoices] = useState([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isSupported, setIsSupported] = useState(false);
@@ -53,8 +53,8 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
   }
 
   function speak({
-    voice = getDefaultVoice(),
     text = '',
+    voice = getDefaultVoice(),
     rate = 1,
     pitch = 1,
     volume = 1,
@@ -90,9 +90,9 @@ export function useSpeechSynthesis({ ...props }: Props): SpeechSynthesis {
 
   return {
     isSupported,
-    speak,
-    cancel,
     isSpeaking,
     voices,
+    cancel,
+    speak,
   };
 }
