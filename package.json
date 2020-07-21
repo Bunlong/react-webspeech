@@ -19,7 +19,7 @@
     "react-webspeech",
     "typescript"
   ],
-  "homepage": "https://react-webspeech.github.io",
+  "homepage": "https://github.com/Bunlong/react-webspeech",
   "main": "dist/react-webspeech.js",
   "module": "dist/react-webspeech.es.js",
   "jsnext:main": "dist/react-webspeech.es.js",

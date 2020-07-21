@@ -6,7 +6,7 @@ import { useEffect, useRef, useCallback } from 'react';
  *
  */
 
- export function useEventCallback<T extends (...args: any[]) => unknown>(
+export function useEventCallback<T extends (...args: any[]) => unknown>(
   fn: T,
   deps: ReadonlyArray<unknown>,
 ) {
