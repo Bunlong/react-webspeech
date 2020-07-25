@@ -17,8 +17,8 @@ react-webspeech – Official WebSpeech for React.
 ## Features
 
 * Compatible with both JavaScript and TypeScript
-* <a href="#usespeechsynthesis">useSpeechSynthesis (text-to-speech)</a>
-* useSpeechRecognition (speech-to-text)
+* <a href="#usespeechsynthesis">useSpeechSynthesis (text-to-speech)</a> – [Demo](https://fbv4x.csb.app/).
+* useSpeechRecognition (speech-to-text) – Coming in next version.
 
 ## Install
 
